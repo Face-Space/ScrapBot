@@ -23,7 +23,7 @@ async def start_bot(message: types.Message):
 async def message_link(message: types.Message, state: FSMContext):
     await message.answer("Парсинг сайта начался, пожалуйста подождите...")
     # Выполняем scraping.main() в отдельном потоке
-    # await asyncio.get_running_loop().run_in_executor(None, scraping.main)
+    await asyncio.get_running_loop().run_in_executor(None, scraping.main)
     await message.answer("Цены спарсены. Выберите нужную Вам категорию:", reply_markup=category_kb.as_markup())
     await state.set_state(NextStep.choose_category)
 
